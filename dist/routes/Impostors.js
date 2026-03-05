@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const Impostors_1 = require("../controllers/Impostors");
+const router = (0, express_1.Router)();
+router.post("/candidates", Impostors_1.findCandidates);
+router.post("/play/normal", Impostors_1.playNormalGame);
+router.post("/play/oneByOne", Impostors_1.playOneByOneGame);
+router.get("/gamedata", Impostors_1.getGameData);
+router.post("/giveup", Impostors_1.surrenderImpostorGame);
+exports.default = router;
