@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const GuessPodiums_1 = require("../controllers/GuessPodiums");
+const router = (0, express_1.Router)();
+router.get("/play", GuessPodiums_1.getGameData);
+router.get("/surrender", GuessPodiums_1.surrender);
+router.post("/guessOne", GuessPodiums_1.guessOne);
+router.post("/guessAll", GuessPodiums_1.guessAll);
+exports.default = router;

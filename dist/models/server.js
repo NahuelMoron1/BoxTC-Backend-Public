@@ -22,8 +22,12 @@ const FEwebhook_1 = __importDefault(require("../FEwebhook"));
 const Best_tens_1 = __importDefault(require("../routes/Best_tens"));
 const Connections_1 = __importDefault(require("../routes/Connections"));
 const Cookie_1 = __importDefault(require("../routes/Cookie"));
+const Email_1 = __importDefault(require("../routes/Email"));
+const GuessCareers_1 = __importDefault(require("../routes/GuessCareers"));
+const GuessPodiums_1 = __importDefault(require("../routes/GuessPodiums"));
 const GuessTeams_1 = __importDefault(require("../routes/GuessTeams"));
 const GuessWords_1 = __importDefault(require("../routes/GuessWords"));
+const H2HGames_1 = __importDefault(require("../routes/H2HGames"));
 const Impostors_1 = __importDefault(require("../routes/Impostors"));
 const News_1 = __importDefault(require("../routes/News"));
 const Season_Teams_1 = __importDefault(require("../routes/Season_Teams"));
@@ -31,14 +35,11 @@ const Season_Teams_Drivers_1 = __importDefault(require("../routes/Season_Teams_D
 const Season_Tracks_1 = __importDefault(require("../routes/Season_Tracks"));
 const Seasons_1 = __importDefault(require("../routes/Seasons"));
 const Teams_1 = __importDefault(require("../routes/Teams"));
+const Timeline_1 = __importDefault(require("../routes/Timeline"));
 const Tracks_1 = __importDefault(require("../routes/Tracks"));
 const Users_1 = __importDefault(require("../routes/Users"));
 const Wordle_1 = __importDefault(require("../routes/Wordle"));
-const H2HGames_1 = __importDefault(require("../routes/H2HGames"));
 const webhook_1 = __importDefault(require("../webhook"));
-const Email_1 = __importDefault(require("../routes/Email"));
-const GuessCareers_1 = __importDefault(require("../routes/GuessCareers"));
-const Timeline_1 = __importDefault(require("../routes/Timeline"));
 //database settings
 const connection_1 = __importDefault(require("../db/connection"));
 const config_1 = require("./config");
@@ -75,6 +76,7 @@ class Server {
         this.app.use("/api/users", Users_1.default);
         this.app.use("/api/cookie", Cookie_1.default);
         this.app.use("/api/guess-teams", GuessTeams_1.default);
+        this.app.use("/api/guess-podiums", GuessPodiums_1.default);
         this.app.use("/api/h2h-games", H2HGames_1.default);
         this.app.use("/api/email", Email_1.default);
         this.app.use("/api/guess-careers", GuessCareers_1.default);

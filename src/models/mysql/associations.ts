@@ -1,3 +1,4 @@
+import Brands from "./Brands.js";
 import Connections from "./Connections.js";
 import Connections_Groups from "./Connections_Groups.js";
 import Connections_Groups_Results from "./Connections_Groups_Results.js";
@@ -6,6 +7,7 @@ import GuessCareers from "./GuessCareers.js";
 import GuessCareers_Teams from "./GuessCareers_Teams.js";
 import GuessDrivers from "./GuessDrivers.js";
 import GuessDrivers_Teams from "./GuessDrivers_Teams.js";
+import GuessPodiums from "./GuessPodiums.js";
 import GuessTeams from "./GuessTeams.js";
 import H2HGames from "./H2HGames.js";
 import Impostors from "./Impostors.js";
@@ -158,12 +160,76 @@ TimelineEvent.belongsTo(Timeline, {
   targetKey: "id",
 });
 
+// --- Asociaciones para GuessPodiums ---
+// Un piloto puede estar en múltiples juegos de podio (1era, 2da o 3era posición)
+Drivers.hasMany(GuessPodiums, {
+  foreignKey: "first_place_driver_id",
+  as: "PodiumFirst",
+});
+Drivers.hasMany(GuessPodiums, {
+  foreignKey: "second_place_driver_id",
+  as: "PodiumSecond",
+});
+Drivers.hasMany(GuessPodiums, {
+  foreignKey: "third_place_driver_id",
+  as: "PodiumThird",
+});
+
+// Una marca puede estar en múltiples juegos de podio (1era, 2da o 3era posición)
+Brands.hasMany(GuessPodiums, {
+  foreignKey: "first_place_car_id",
+  as: "CarFirst",
+});
+Brands.hasMany(GuessPodiums, {
+  foreignKey: "second_place_car_id",
+  as: "CarSecond",
+});
+Brands.hasMany(GuessPodiums, {
+  foreignKey: "third_place_car_id",
+  as: "CarThird",
+});
+
+// Un juego de podio pertenece a pilotos específicos
+GuessPodiums.belongsTo(Drivers, {
+  foreignKey: "first_place_driver_id",
+  as: "FirstDriver",
+});
+GuessPodiums.belongsTo(Drivers, {
+  foreignKey: "second_place_driver_id",
+  as: "SecondDriver",
+});
+GuessPodiums.belongsTo(Drivers, {
+  foreignKey: "third_place_driver_id",
+  as: "ThirdDriver",
+});
+
+// Un juego de podio pertenece a marcas específicas
+GuessPodiums.belongsTo(Brands, {
+  foreignKey: "first_place_car_id",
+  as: "FirstCar",
+});
+GuessPodiums.belongsTo(Brands, {
+  foreignKey: "second_place_car_id",
+  as: "SecondCar",
+});
+GuessPodiums.belongsTo(Brands, {
+  foreignKey: "third_place_car_id",
+  as: "ThirdCar",
+});
+
 export {
+  Brands,
   Connections,
   Connections_Groups,
   Connections_Groups_Results,
   Drivers,
+  GuessCareers,
+  GuessCareers_Teams,
+  GuessDrivers,
+  GuessDrivers_Teams,
+  GuessPodiums,
   GuessTeams,
+  H2HGames,
   Impostors,
   Impostors_Results,
   Season_Teams,
@@ -171,12 +237,7 @@ export {
   Season_Tracks,
   Seasons,
   Teams,
-  Tracks,
-  H2HGames,
-  GuessCareers,
-  GuessCareers_Teams,
-  GuessDrivers,
-  GuessDrivers_Teams,
   Timeline,
   TimelineEvent,
+  Tracks,
 };
