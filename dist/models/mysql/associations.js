@@ -3,7 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TimelineEvent = exports.Timeline = exports.GuessDrivers_Teams = exports.GuessDrivers = exports.GuessCareers_Teams = exports.GuessCareers = exports.H2HGames = exports.Tracks = exports.Teams = exports.Seasons = exports.Season_Tracks = exports.Season_Teams_Drivers = exports.Season_Teams = exports.Impostors_Results = exports.Impostors = exports.GuessTeams = exports.Drivers = exports.Connections_Groups_Results = exports.Connections_Groups = exports.Connections = void 0;
+exports.Tracks = exports.TimelineEvent = exports.Timeline = exports.Teams = exports.Seasons = exports.Season_Tracks = exports.Season_Teams_Drivers = exports.Season_Teams = exports.Impostors_Results = exports.Impostors = exports.H2HGames = exports.GuessTeams = exports.GuessPodiums = exports.GuessDrivers_Teams = exports.GuessDrivers = exports.GuessCareers_Teams = exports.GuessCareers = exports.Drivers = exports.Connections_Groups_Results = exports.Connections_Groups = exports.Connections = exports.Brands = void 0;
+const Brands_js_1 = __importDefault(require("./Brands.js"));
+exports.Brands = Brands_js_1.default;
 const Connections_js_1 = __importDefault(require("./Connections.js"));
 exports.Connections = Connections_js_1.default;
 const Connections_Groups_js_1 = __importDefault(require("./Connections_Groups.js"));
@@ -20,6 +22,8 @@ const GuessDrivers_js_1 = __importDefault(require("./GuessDrivers.js"));
 exports.GuessDrivers = GuessDrivers_js_1.default;
 const GuessDrivers_Teams_js_1 = __importDefault(require("./GuessDrivers_Teams.js"));
 exports.GuessDrivers_Teams = GuessDrivers_Teams_js_1.default;
+const GuessPodiums_js_1 = __importDefault(require("./GuessPodiums.js"));
+exports.GuessPodiums = GuessPodiums_js_1.default;
 const GuessTeams_js_1 = __importDefault(require("./GuessTeams.js"));
 exports.GuessTeams = GuessTeams_js_1.default;
 const H2HGames_js_1 = __importDefault(require("./H2HGames.js"));
@@ -158,4 +162,57 @@ Timeline_js_1.default.hasMany(TimelineEvent_js_1.default, {
 TimelineEvent_js_1.default.belongsTo(Timeline_js_1.default, {
     foreignKey: "gameID",
     targetKey: "id",
+});
+// --- Asociaciones para GuessPodiums ---
+// Un piloto puede estar en múltiples juegos de podio (1era, 2da o 3era posición)
+Drivers_js_1.default.hasMany(GuessPodiums_js_1.default, {
+    foreignKey: "first_place_driver_id",
+    as: "PodiumFirst",
+});
+Drivers_js_1.default.hasMany(GuessPodiums_js_1.default, {
+    foreignKey: "second_place_driver_id",
+    as: "PodiumSecond",
+});
+Drivers_js_1.default.hasMany(GuessPodiums_js_1.default, {
+    foreignKey: "third_place_driver_id",
+    as: "PodiumThird",
+});
+// Una marca puede estar en múltiples juegos de podio (1era, 2da o 3era posición)
+Brands_js_1.default.hasMany(GuessPodiums_js_1.default, {
+    foreignKey: "first_place_car_id",
+    as: "CarFirst",
+});
+Brands_js_1.default.hasMany(GuessPodiums_js_1.default, {
+    foreignKey: "second_place_car_id",
+    as: "CarSecond",
+});
+Brands_js_1.default.hasMany(GuessPodiums_js_1.default, {
+    foreignKey: "third_place_car_id",
+    as: "CarThird",
+});
+// Un juego de podio pertenece a pilotos específicos
+GuessPodiums_js_1.default.belongsTo(Drivers_js_1.default, {
+    foreignKey: "first_place_driver_id",
+    as: "FirstDriver",
+});
+GuessPodiums_js_1.default.belongsTo(Drivers_js_1.default, {
+    foreignKey: "second_place_driver_id",
+    as: "SecondDriver",
+});
+GuessPodiums_js_1.default.belongsTo(Drivers_js_1.default, {
+    foreignKey: "third_place_driver_id",
+    as: "ThirdDriver",
+});
+// Un juego de podio pertenece a marcas específicas
+GuessPodiums_js_1.default.belongsTo(Brands_js_1.default, {
+    foreignKey: "first_place_car_id",
+    as: "FirstCar",
+});
+GuessPodiums_js_1.default.belongsTo(Brands_js_1.default, {
+    foreignKey: "second_place_car_id",
+    as: "SecondCar",
+});
+GuessPodiums_js_1.default.belongsTo(Brands_js_1.default, {
+    foreignKey: "third_place_car_id",
+    as: "ThirdCar",
 });
