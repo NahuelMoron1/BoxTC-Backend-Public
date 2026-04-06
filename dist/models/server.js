@@ -24,6 +24,7 @@ const Connections_1 = __importDefault(require("../routes/Connections"));
 const Cookie_1 = __importDefault(require("../routes/Cookie"));
 const Email_1 = __importDefault(require("../routes/Email"));
 const GuessCareers_1 = __importDefault(require("../routes/GuessCareers"));
+const GuessDriver_1 = __importDefault(require("../routes/GuessDriver"));
 const GuessPodiums_1 = __importDefault(require("../routes/GuessPodiums"));
 const GuessTeams_1 = __importDefault(require("../routes/GuessTeams"));
 const GuessWords_1 = __importDefault(require("../routes/GuessWords"));
@@ -76,6 +77,7 @@ class Server {
         this.app.use("/api/users", Users_1.default);
         this.app.use("/api/cookie", Cookie_1.default);
         this.app.use("/api/guess-teams", GuessTeams_1.default);
+        this.app.use("/api/guess-driver", GuessDriver_1.default);
         this.app.use("/api/guess-podiums", GuessPodiums_1.default);
         this.app.use("/api/h2h-games", H2HGames_1.default);
         this.app.use("/api/email", Email_1.default);

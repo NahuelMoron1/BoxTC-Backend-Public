@@ -11,6 +11,7 @@ import connectionsRouter from "../routes/Connections";
 import cookieRouter from "../routes/Cookie";
 import emailRouter from "../routes/Email";
 import guessCareersRouter from "../routes/GuessCareers";
+import guessDriverRouter from "../routes/GuessDriver";
 import guessPodiumsRouter from "../routes/GuessPodiums";
 import guessTeamsRouter from "../routes/GuessTeams";
 import GuessWordsRouter from "../routes/GuessWords";
@@ -66,6 +67,7 @@ class Server {
     this.app.use("/api/users", userRouter);
     this.app.use("/api/cookie", cookieRouter);
     this.app.use("/api/guess-teams", guessTeamsRouter);
+    this.app.use("/api/guess-driver", guessDriverRouter);
     this.app.use("/api/guess-podiums", guessPodiumsRouter);
     this.app.use("/api/h2h-games", h2hGamesRouter);
     this.app.use("/api/email", emailRouter);

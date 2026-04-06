@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Tracks = exports.TimelineEvent = exports.Timeline = exports.Teams = exports.Seasons = exports.Season_Tracks = exports.Season_Teams_Drivers = exports.Season_Teams = exports.Impostors_Results = exports.Impostors = exports.H2HGames = exports.GuessTeams = exports.GuessPodiums = exports.GuessDrivers_Teams = exports.GuessDrivers = exports.GuessCareers_Teams = exports.GuessCareers = exports.Drivers = exports.Connections_Groups_Results = exports.Connections_Groups = exports.Connections = exports.Brands = void 0;
+exports.Tracks = exports.TimelineEvent = exports.Timeline = exports.Teams = exports.Seasons = exports.Season_Tracks = exports.Season_Teams_Drivers = exports.Season_Teams = exports.Impostors_Results = exports.Impostors = exports.H2HGames = exports.GuessTeams = exports.GuessPodiums = exports.GuessDrivers_Teams = exports.GuessDrivers = exports.GuessDriver = exports.GuessCareers_Teams = exports.GuessCareers = exports.Drivers = exports.Connections_Groups_Results = exports.Connections_Groups = exports.Connections = exports.Brands = void 0;
 const Brands_js_1 = __importDefault(require("./Brands.js"));
 exports.Brands = Brands_js_1.default;
 const Connections_js_1 = __importDefault(require("./Connections.js"));
@@ -18,6 +18,8 @@ const GuessCareers_js_1 = __importDefault(require("./GuessCareers.js"));
 exports.GuessCareers = GuessCareers_js_1.default;
 const GuessCareers_Teams_js_1 = __importDefault(require("./GuessCareers_Teams.js"));
 exports.GuessCareers_Teams = GuessCareers_Teams_js_1.default;
+const GuessDriver_js_1 = __importDefault(require("./GuessDriver.js"));
+exports.GuessDriver = GuessDriver_js_1.default;
 const GuessDrivers_js_1 = __importDefault(require("./GuessDrivers.js"));
 exports.GuessDrivers = GuessDrivers_js_1.default;
 const GuessDrivers_Teams_js_1 = __importDefault(require("./GuessDrivers_Teams.js"));
@@ -215,4 +217,23 @@ GuessPodiums_js_1.default.belongsTo(Brands_js_1.default, {
 GuessPodiums_js_1.default.belongsTo(Brands_js_1.default, {
     foreignKey: "third_place_car_id",
     as: "ThirdCar",
+});
+// --- Asociaciones para GuessDriver ---
+// Un juego de GuessDriver pertenece a un piloto
+Drivers_js_1.default.hasMany(GuessDriver_js_1.default, { foreignKey: "driverID" });
+GuessDriver_js_1.default.belongsTo(Drivers_js_1.default, {
+    foreignKey: "driverID",
+    targetKey: "id",
+});
+// Un juego de GuessDriver pertenece a una marca
+Brands_js_1.default.hasMany(GuessDriver_js_1.default, { foreignKey: "brandID" });
+GuessDriver_js_1.default.belongsTo(Brands_js_1.default, {
+    foreignKey: "brandID",
+    targetKey: "id",
+});
+// Un juego de GuessDriver pertenece a una temporada
+Seasons_js_1.default.hasMany(GuessDriver_js_1.default, { foreignKey: "seasonID" });
+GuessDriver_js_1.default.belongsTo(Seasons_js_1.default, {
+    foreignKey: "seasonID",
+    targetKey: "id",
 });
