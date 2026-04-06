@@ -78,6 +78,9 @@ exports.getGameData = getGameData;
 const guessOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { type, position, id } = req.body;
+        console.log("TYPE: ", type);
+        console.log("POSITION: ", position);
+        console.log("ID: ", id);
         if (!type ||
             !position ||
             !id ||
@@ -130,7 +133,7 @@ const guessOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Según el tipo (driver o car) y la posición (1, 2, 3), validar
         switch (type) {
             case "driver":
-                if (position === "1") {
+                if (position === "first") {
                     guessed = id === gamedata.getDataValue("first_place_driver_id");
                     if (guessed) {
                         const driver = gamedata.getDataValue("FirstDriver");
@@ -140,7 +143,7 @@ const guessOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                         };
                     }
                 }
-                else if (position === "2") {
+                else if (position === "second") {
                     guessed = id === gamedata.getDataValue("second_place_driver_id");
                     if (guessed) {
                         const driver = gamedata.getDataValue("SecondDriver");
@@ -150,7 +153,7 @@ const guessOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                         };
                     }
                 }
-                else if (position === "3") {
+                else if (position === "third") {
                     guessed = id === gamedata.getDataValue("third_place_driver_id");
                     if (guessed) {
                         const driver = gamedata.getDataValue("ThirdDriver");
