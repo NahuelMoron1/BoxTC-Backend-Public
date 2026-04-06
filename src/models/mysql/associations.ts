@@ -5,6 +5,7 @@ import Connections_Groups_Results from "./Connections_Groups_Results.js";
 import Drivers from "./Drivers.js";
 import GuessCareers from "./GuessCareers.js";
 import GuessCareers_Teams from "./GuessCareers_Teams.js";
+import GuessDriver from "./GuessDriver.js";
 import GuessDrivers from "./GuessDrivers.js";
 import GuessDrivers_Teams from "./GuessDrivers_Teams.js";
 import GuessPodiums from "./GuessPodiums.js";
@@ -217,6 +218,28 @@ GuessPodiums.belongsTo(Brands, {
   as: "ThirdCar",
 });
 
+// --- Asociaciones para GuessDriver ---
+// Un juego de GuessDriver pertenece a un piloto
+Drivers.hasMany(GuessDriver, { foreignKey: "driverID" });
+GuessDriver.belongsTo(Drivers, {
+  foreignKey: "driverID",
+  targetKey: "id",
+});
+
+// Un juego de GuessDriver pertenece a una marca
+Brands.hasMany(GuessDriver, { foreignKey: "brandID" });
+GuessDriver.belongsTo(Brands, {
+  foreignKey: "brandID",
+  targetKey: "id",
+});
+
+// Un juego de GuessDriver pertenece a una temporada
+Seasons.hasMany(GuessDriver, { foreignKey: "seasonID" });
+GuessDriver.belongsTo(Seasons, {
+  foreignKey: "seasonID",
+  targetKey: "id",
+});
+
 export {
   Brands,
   Connections,
@@ -225,6 +248,7 @@ export {
   Drivers,
   GuessCareers,
   GuessCareers_Teams,
+  GuessDriver,
   GuessDrivers,
   GuessDrivers_Teams,
   GuessPodiums,
